@@ -1,53 +1,49 @@
 
-
 <?php
-echo "<h2>Operadores Lógicos</h2>";
+echo "<h2>Operador Ternario</h2>";
 
-$verdadero = true;
-$falso = false;
+// Ejemplo básico
+$edad = 20;
+$mensaje = ($edad >= 18) ? "Eres mayor de edad" : "Eres menor de edad";
+echo "Edad: $edad<br>";
+echo "Mensaje: $mensaje<br><br>";
 
-echo "Variables: verdadero = " . var_export($verdadero, true) . ", falso = " . var_export($falso, true) . "<br><br>";
+// Uso con diferentes tipos de datos
+$nombre = "Juan";
+$saludo = ($nombre !== "") ? "Hola, $nombre!" : "Hola, invitado!";
+echo "Nombre: '$nombre'<br>";
+echo "Saludo: $saludo<br><br>";
 
-// Operador AND (&&)
-echo "AND (&&):<br>";
-echo "verdadero && verdadero = " . var_export($verdadero && $verdadero, true) . "<br>";
-echo "verdadero && falso = " . var_export($verdadero && $falso, true) . "<br>";
-echo "falso && falso = " . var_export($falso && $falso, true) . "<br><br>";
+// Comparación con if-else tradicional
+$puntuacion = 75;
+if ($puntuacion >= 60) {
+    $resultado = "Aprobado";
+} else {
+    $resultado = "Reprobado";
+}
+echo "Puntuación: $puntuacion<br>";
+echo "Resultado (if-else): $resultado<br>";
 
-// Operador OR (||)
-echo "OR (||):<br>";
-echo "verdadero || verdadero = " . var_export($verdadero || $verdadero, true) . "<br>";
-echo "verdadero || falso = " . var_export($verdadero || $falso, true) . "<br>";
-echo "falso || falso = " . var_export($falso || $falso, true) . "<br><br>";
+// El mismo ejemplo con operador ternario
+$resultadoTernario = ($puntuacion >= 60) ? "Aprobado" : "Reprobado";
+echo "Resultado (ternario): $resultadoTernario<br><br>";
 
-// Operador NOT (!)
-echo "NOT (!):<br>";
-echo "!verdadero = " . var_export(!$verdadero, true) . "<br>";
-echo "!falso = " . var_export(!$falso, true) . "<br><br>";
+// Anidación de operadores ternarios (uso con precaución)
+$nota = 85;
+$calificacion = ($nota >= 90) ? "A" : (($nota >= 80) ? "B" : (($nota >= 70) ? "C" : (($nota >= 60) ? "D" : "F")));
+echo "Nota: $nota<br>";
+echo "Calificación: $calificacion<br><br>";
 
-// Operador XOR
-echo "XOR:<br>";
-echo "verdadero XOR verdadero = " . var_export($verdadero xor $verdadero, true) . "<br>";
-echo "verdadero XOR falso = " . var_export($verdadero xor $falso, true) . "<br>";
-echo "falso XOR falso = " . var_export($falso xor $falso, true) . "<br><br>";
+// Uso del operador ternario para asignar un valor predeterminado
+$nombreUsuario = "";
+$nombreMostrar = $nombreUsuario ?: "Invitado"; // Equivalente a: $nombreUsuario ? $nombreUsuario : "Invitado"
+echo "Nombre de usuario: '$nombreUsuario'<br>";
+echo "Nombre a mostrar: $nombreMostrar<br><br>";
 
-// Ejemplo práctico
-$edad = 25;
-$tieneLicencia = true;
-
-$puedeConducir = ($edad >= 18) && $tieneLicencia;
-echo "Ejemplo práctico:<br>";
-echo "Edad: $edad, Tiene licencia: " . var_export($tieneLicencia, true) . "<br>";
-echo "¿Puede conducir? " . var_export($puedeConducir, true) . "<br><br>";
-
-// Demostración de cortocircuito
-echo "Demostración de cortocircuito:<br>";
-$x = false;
-$y = true;
-$result = $x && $y; // $y no se evalúa porque $x es falso
-echo "false && true = " . var_export($result, true) . " (y no se evalúa)<br>";
-
-$result = $x || $y; // $y se evalúa porque $x es falso
-echo "false || true = " . var_export($result, true) . " (y se evalúa)<br>";
+// Uso del operador ternario en una expresión
+$x = 5;
+$y = 10;
+echo "x = $x, y = $y<br>";
+echo "El mayor valor es: " . (($x > $y) ? $x : $y) . "<br>";
 ?>
     
