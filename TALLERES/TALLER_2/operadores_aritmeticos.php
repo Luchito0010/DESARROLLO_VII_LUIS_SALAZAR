@@ -1,49 +1,71 @@
 
 <?php
-echo "<h2>Operador Ternario</h2>";
+echo "<h2>Estructuras Condicionales: if, else, elseif</h2>";
 
-// Ejemplo básico
-$edad = 20;
-$mensaje = ($edad >= 18) ? "Eres mayor de edad" : "Eres menor de edad";
-echo "Edad: $edad<br>";
-echo "Mensaje: $mensaje<br><br>";
-
-// Uso con diferentes tipos de datos
-$nombre = "Juan";
-$saludo = ($nombre !== "") ? "Hola, $nombre!" : "Hola, invitado!";
-echo "Nombre: '$nombre'<br>";
-echo "Saludo: $saludo<br><br>";
-
-// Comparación con if-else tradicional
-$puntuacion = 75;
-if ($puntuacion >= 60) {
-    $resultado = "Aprobado";
-} else {
-    $resultado = "Reprobado";
+// Ejemplo básico de if
+$edad = 18;
+if ($edad >= 18) {
+    echo "Eres mayor de edad.<br><br>";
 }
-echo "Puntuación: $puntuacion<br>";
-echo "Resultado (if-else): $resultado<br>";
 
-// El mismo ejemplo con operador ternario
-$resultadoTernario = ($puntuacion >= 60) ? "Aprobado" : "Reprobado";
-echo "Resultado (ternario): $resultadoTernario<br><br>";
+// Ejemplo de if-else
+$tienePermiso = false;
+if ($tienePermiso) {
+    echo "Tienes permiso para acceder.<br>";
+} else {
+    echo "No tienes permiso para acceder.<br><br>";
+}
 
-// Anidación de operadores ternarios (uso con precaución)
-$nota = 85;
-$calificacion = ($nota >= 90) ? "A" : (($nota >= 80) ? "B" : (($nota >= 70) ? "C" : (($nota >= 60) ? "D" : "F")));
-echo "Nota: $nota<br>";
-echo "Calificación: $calificacion<br><br>";
+// Ejemplo de if-elseif-else
+$calificacion = 85;
+if ($calificacion >= 90) {
+    echo "Tu calificación es A.<br>";
+} elseif ($calificacion >= 80) {
+    echo "Tu calificación es B.<br>";
+} elseif ($calificacion >= 70) {
+    echo "Tu calificación es C.<br>";
+} elseif ($calificacion >= 60) {
+    echo "Tu calificación es D.<br>";
+} else {
+    echo "Tu calificación es F.<br>";
+}
+echo "<br>";
 
-// Uso del operador ternario para asignar un valor predeterminado
-$nombreUsuario = "";
-$nombreMostrar = $nombreUsuario ?: "Invitado"; // Equivalente a: $nombreUsuario ? $nombreUsuario : "Invitado"
-echo "Nombre de usuario: '$nombreUsuario'<br>";
-echo "Nombre a mostrar: $nombreMostrar<br><br>";
+// Anidación de estructuras if
+$esUsuario = true;
+$esAdmin = false;
+if ($esUsuario) {
+    echo "Bienvenido, usuario.<br>";
+    if ($esAdmin) {
+        echo "Tienes privilegios de administrador.<br>";
+    } else {
+        echo "No tienes privilegios de administrador.<br>";
+    }
+} else {
+    echo "Por favor, inicia sesión.<br>";
+}
+echo "<br>";
 
-// Uso del operador ternario en una expresión
-$x = 5;
-$y = 10;
-echo "x = $x, y = $y<br>";
-echo "El mayor valor es: " . (($x > $y) ? $x : $y) . "<br>";
+// Uso de operadores lógicos en condiciones
+$usuario = "admin";
+$contrasena = "12345";
+if ($usuario === "admin" && $contrasena === "12345") {
+    echo "Inicio de sesión exitoso como administrador.<br>";
+} elseif ($usuario === "admin" || $contrasena === "12345") {
+    echo "Usuario o contraseña incorrectos.<br>";
+} else {
+    echo "Acceso denegado.<br>";
+}
+echo "<br>";
+
+// Sintaxis alternativa para estructuras de control
+$esDiaLaboral = true;
+if ($esDiaLaboral):
+    echo "A trabajar.<br>";
+else:
+    echo "A descansar.<br>";
+endif;
+
 ?>
     
+
