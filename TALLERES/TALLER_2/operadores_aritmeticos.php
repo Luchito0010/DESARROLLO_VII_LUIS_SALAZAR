@@ -1,44 +1,55 @@
 
 <?php
-echo "<h2>Operadores de Asignación</h2>";
+echo "<h2>Operadores de Comparación</h2>";
 
-$x = 10;
-echo "Valor inicial de x: $x<br>";
+$a = 5;
+$b = '5';
+$c = 10;
 
-$x += 5;  // Equivalente a: $x = $x + 5
-echo "Después de x += 5: $x<br>";
+echo "Variables: a = $a (integer), b = '$b' (string), c = $c (integer)<br><br>";
 
-$x -= 3;  // Equivalente a: $x = $x - 3
-echo "Después de x -= 3: $x<br>";
+echo "Igual (==): ";
+var_dump($a == $b);
+echo "<br>";
 
-$x *= 2;  // Equivalente a: $x = $x * 2
-echo "Después de x *= 2: $x<br>";
+echo "Idéntico (===): ";
+var_dump($a === $b);
+echo "<br>";
 
-$x /= 4;  // Equivalente a: $x = $x / 4
-echo "Después de x /= 4: $x<br>";
+echo "Diferente (!=): ";
+var_dump($a != $c);
+echo "<br>";
 
-$x %= 3;  // Equivalente a: $x = $x % 3
-echo "Después de x %= 3: $x<br>";
+echo "No idéntico (!==): ";
+var_dump($a !== $b);
+echo "<br>";
 
-// Operador de asignación con concatenación
-$str = "Hola";
-$str .= " Mundo";  // Equivalente a: $str = $str . " Mundo"
-echo "Concatenación con .=: $str<br>";
+echo "Menor que (<): ";
+var_dump($a < $c);
+echo "<br>";
 
-// Operador de asignación con exponenciación (PHP 5.6+)
-$y = 2;
-$y **= 3;  // Equivalente a: $y = $y ** 3
-echo "Después de y **= 3: $y<br>";
+echo "Mayor que (>): ";
+var_dump($a > $c);
+echo "<br>";
+
+echo "Menor o igual que (<=): ";
+var_dump($a <= $b);
+echo "<br>";
+
+echo "Mayor o igual que (>=): ";
+var_dump($a >= $c);
+echo "<br>";
+
+// Operador de nave espacial (PHP 7+)
+echo "Operador de nave espacial (<=>): ";
+var_dump($a <=> $c);
+echo "<br>";
 
 // Operador de fusión de null (PHP 7+)
-$z = null;
-$z ??= 5;  // Asigna 5 a $z solo si $z es null
-echo "Después de z ??= 5: $z<br>";
+$d = null;
+$e = $d ?? 'valor por defecto';
+echo "Operador de fusión de null (??): $e<br>";
 
-// Demostración de asignación por referencia
-$a = 1;
-$b = &$a;  // $b es una referencia a $a
-$b = 2;    // Cambia tanto $a como $b
-echo "a: $a, b: $b<br>";
 ?>
     
+							
