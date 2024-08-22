@@ -1,55 +1,53 @@
 
+
 <?php
-echo "<h2>Operadores de Comparación</h2>";
+echo "<h2>Operadores Lógicos</h2>";
 
-$a = 5;
-$b = '5';
-$c = 10;
+$verdadero = true;
+$falso = false;
 
-echo "Variables: a = $a (integer), b = '$b' (string), c = $c (integer)<br><br>";
+echo "Variables: verdadero = " . var_export($verdadero, true) . ", falso = " . var_export($falso, true) . "<br><br>";
 
-echo "Igual (==): ";
-var_dump($a == $b);
-echo "<br>";
+// Operador AND (&&)
+echo "AND (&&):<br>";
+echo "verdadero && verdadero = " . var_export($verdadero && $verdadero, true) . "<br>";
+echo "verdadero && falso = " . var_export($verdadero && $falso, true) . "<br>";
+echo "falso && falso = " . var_export($falso && $falso, true) . "<br><br>";
 
-echo "Idéntico (===): ";
-var_dump($a === $b);
-echo "<br>";
+// Operador OR (||)
+echo "OR (||):<br>";
+echo "verdadero || verdadero = " . var_export($verdadero || $verdadero, true) . "<br>";
+echo "verdadero || falso = " . var_export($verdadero || $falso, true) . "<br>";
+echo "falso || falso = " . var_export($falso || $falso, true) . "<br><br>";
 
-echo "Diferente (!=): ";
-var_dump($a != $c);
-echo "<br>";
+// Operador NOT (!)
+echo "NOT (!):<br>";
+echo "!verdadero = " . var_export(!$verdadero, true) . "<br>";
+echo "!falso = " . var_export(!$falso, true) . "<br><br>";
 
-echo "No idéntico (!==): ";
-var_dump($a !== $b);
-echo "<br>";
+// Operador XOR
+echo "XOR:<br>";
+echo "verdadero XOR verdadero = " . var_export($verdadero xor $verdadero, true) . "<br>";
+echo "verdadero XOR falso = " . var_export($verdadero xor $falso, true) . "<br>";
+echo "falso XOR falso = " . var_export($falso xor $falso, true) . "<br><br>";
 
-echo "Menor que (<): ";
-var_dump($a < $c);
-echo "<br>";
+// Ejemplo práctico
+$edad = 25;
+$tieneLicencia = true;
 
-echo "Mayor que (>): ";
-var_dump($a > $c);
-echo "<br>";
+$puedeConducir = ($edad >= 18) && $tieneLicencia;
+echo "Ejemplo práctico:<br>";
+echo "Edad: $edad, Tiene licencia: " . var_export($tieneLicencia, true) . "<br>";
+echo "¿Puede conducir? " . var_export($puedeConducir, true) . "<br><br>";
 
-echo "Menor o igual que (<=): ";
-var_dump($a <= $b);
-echo "<br>";
+// Demostración de cortocircuito
+echo "Demostración de cortocircuito:<br>";
+$x = false;
+$y = true;
+$result = $x && $y; // $y no se evalúa porque $x es falso
+echo "false && true = " . var_export($result, true) . " (y no se evalúa)<br>";
 
-echo "Mayor o igual que (>=): ";
-var_dump($a >= $c);
-echo "<br>";
-
-// Operador de nave espacial (PHP 7+)
-echo "Operador de nave espacial (<=>): ";
-var_dump($a <=> $c);
-echo "<br>";
-
-// Operador de fusión de null (PHP 7+)
-$d = null;
-$e = $d ?? 'valor por defecto';
-echo "Operador de fusión de null (??): $e<br>";
-
+$result = $x || $y; // $y se evalúa porque $x es falso
+echo "false || true = " . var_export($result, true) . " (y se evalúa)<br>";
 ?>
     
-							
