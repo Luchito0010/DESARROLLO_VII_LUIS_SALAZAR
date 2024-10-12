@@ -3,7 +3,7 @@ session_start();
 
 // Si ya hay una sesión activa, redirigir al panel
 if(isset($_SESSION['usuario'])) {
-    header("Location: panel.php");
+    header("Location: productos.php");
     exit();
 }
 
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // En un caso real, verificaríamos contra una base de datos
     if($usuario === "admin" && $contrasena === "1234") {
         $_SESSION['usuario'] = $usuario;
-        header("Location: panel.php");
+        header("Location: login.php");
         exit();
     } else {
         $error = "Usuario o contraseña incorrectos";
