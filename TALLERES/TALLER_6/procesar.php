@@ -6,52 +6,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errores = [];
     $datos = [];
 
-    // Procesar y validar cada campo
-    $campos = ['nombre', 'email', 'edad', 'sitio_web', 'genero', 'intereses', 'comentarios'];
-    foreach ($campos as $campo) {
-        if (isset($_POST[$campo])) {
+    $camposObligatorios = ['nombre', 'email', 'fecha_nacimiento'];
+    foreach ($camposObligatorios as $campo) {
+        if (empty($_POST[$campo])) {
+            $errores[] = "El campo $campo es obligatorio.";
+        } else {
             $valor = $_POST[$campo];
-            $valorSanitizado = call_user_func("sanitizar" . ucfirst($campo), $valor);
-            $datos[$campo] = $valorSanitizado;
-
-            if (!call_user_func("validar" . ucfirst($campo), $valorSanitizado)) {
-                $errores[] = "El campo $campo no es válido.";
-            }
+            $funcionSanitizar = "sanitizar" . ucfirst($campo);
+            $datos[$campo] = call_user_func($funcionSanitizar, $valor);
         }
     }
 
-    // Procesar la foto de perfil
+    // Validación opcional para sitioWeb
+    if (!empty($_POST['sitioWeb'])) {
+        $datos['sitioWeb'] = sanitizarSitioWeb($_POST['sitioWeb']);
+        if (!validarSitioWeb($datos['sitioWeb'])) {
+            $errores[] = "El campo sitioWeb no es válido.";
+        }
+    }
+
+    // Cálculo de la edad si la fecha de nacimiento es válida
+    if (isset($datos['fecha_nacimiento'])) {
+        try {
+            $fechaNacimiento = new DateTime($datos['fecha_nacimiento']);
+            $edad = $fechaNacimiento->diff(new DateTime())->y;
+            $datos['edad'] = $edad;
+
+            if ($edad < 18 || $edad > 120) {
+                $errores[] = "La edad debe estar entre 18 y 120 años.";
+            }
+        } catch (Exception $e) {
+            $errores[] = "Fecha de nacimiento no válida.";
+        }
+    }
+
+    // Validación y carga de la foto de perfil con nombre único
     if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] !== UPLOAD_ERR_NO_FILE) {
         if (!validarFotoPerfil($_FILES['foto_perfil'])) {
             $errores[] = "La foto de perfil no es válida.";
         } else {
-            $rutaDestino = 'uploads/' . basename($_FILES['foto_perfil']['name']);
+            $nombreUnico = uniqid() . "_" . basename($_FILES['foto_perfil']['name']);
+            $rutaDestino = 'uploads/' . $nombreUnico;
+
             if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaDestino)) {
                 $datos['foto_perfil'] = $rutaDestino;
             } else {
-                $errores[] = "Hubo un error al subir la foto de perfil.";
+                $errores[] = "Error al subir la foto de perfil.";
             }
         }
     }
 
-    // Mostrar resultados o errores
     if (empty($errores)) {
         echo "<h2>Datos Recibidos:</h2>";
         foreach ($datos as $campo => $valor) {
-            if ($campo === 'intereses') {
-                echo "$campo: " . implode(", ", $valor) . "<br>";
-            } elseif ($campo === 'foto_perfil') {
+            if ($campo === 'foto_perfil') {
                 echo "$campo: <img src='$valor' width='100'><br>";
             } else {
                 echo "$campo: $valor<br>";
             }
         }
+
+        $archivo = 'registros.json';
+        $registros = file_exists($archivo) ? json_decode(file_get_contents($archivo), true) : [];
+        $registros[] = $datos;
+        file_put_contents($archivo, json_encode($registros));
     } else {
         echo "<h2>Errores:</h2>";
         foreach ($errores as $error) {
             echo "$error<br>";
         }
+        echo "<br><a href='formulario.html'>Volver al formulario</a>";
     }
 } else {
     echo "Acceso no permitido.";
 }
+?>
