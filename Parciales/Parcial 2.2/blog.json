@@ -1,0 +1,30 @@
+[
+    {
+        "id": "1",
+        "fecha_creacion": "2024-09-27",
+        "tipo": 1,
+        "titulo": "Mi primera entrada",
+        "descripcion": "Esta es mi primera entrada en el blog. \u00a1Estoy emocionado de comenzar esta nueva aventura!"
+    },
+    {
+        "id": 2,
+        "fecha_creacion": "2023-05-02",
+        "tipo": 2,
+        "titulo": null,
+        "descripcion": null
+    },
+    {
+        "id": 3,
+        "fecha_creacion": "2023-05-03",
+        "tipo": 3,
+        "titulo": null,
+        "descripcion": null
+    },
+    {
+        "id": 4,
+        "fecha_creacion": null,
+        "tipo": "1",
+        "titulo": "prueba",
+        "descripcion": "12345"
+    }
+]
