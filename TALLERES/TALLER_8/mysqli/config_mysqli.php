@@ -15,4 +15,3 @@ if($conn === false){
 } else {
     echo "Conexión exitosa";
 }
-
