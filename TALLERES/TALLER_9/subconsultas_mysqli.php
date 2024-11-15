@@ -96,9 +96,6 @@ if ($result) {
     } 
 }
 
-
-
-
 //porcentaje de ventas
 $sql = "SELECT p.id AS producto_id, 
                 p.nombre AS producto_nombre,
